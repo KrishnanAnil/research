@@ -17,6 +17,7 @@ use Cake\ORM\Entity;
  * @property string $weakness
  * @property int $major_id
  * @property int $interest_id
+ * @property int $userType_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *

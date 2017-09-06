@@ -31,6 +31,7 @@
                 <th scope="col"><?= $this->Paginator->sort('password') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('major_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('interest_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('userType_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -47,6 +48,7 @@
                 <td><?= h($user->password) ?></td>
                 <td><?= $user->has('major') ? $this->Html->link($user->major->title, ['controller' => 'Majors', 'action' => 'view', $user->major->id]) : '' ?></td>
                 <td><?= $user->has('interest') ? $this->Html->link($user->interest->title, ['controller' => 'Interests', 'action' => 'view', $user->interest->id]) : '' ?></td>
+                <td><?= $this->Number->format($user->userType_id) ?></td>
                 <td><?= h($user->created) ?></td>
                 <td><?= h($user->modified) ?></td>
                 <td class="actions">

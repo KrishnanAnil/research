@@ -32,6 +32,7 @@
             echo $this->Form->control('weakness');
             echo $this->Form->control('major_id', ['options' => $majors]);
             echo $this->Form->control('interest_id', ['options' => $interests]);
+            echo $this->Form->control('userType_id');
             echo $this->Form->control('projects._ids', ['options' => $projects]);
             echo $this->Form->control('skills._ids', ['options' => $skills]);
         ?>

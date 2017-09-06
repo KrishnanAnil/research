@@ -28,16 +28,19 @@ class UsersFixture extends TestFixture
         'weakness' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null],
         'major_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'interest_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'userType_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
             'major_key' => ['type' => 'index', 'columns' => ['major_id'], 'length' => []],
             'interest_key' => ['type' => 'index', 'columns' => ['interest_id'], 'length' => []],
+            'user_type_key' => ['type' => 'index', 'columns' => ['userType_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'interest_key' => ['type' => 'foreign', 'columns' => ['interest_id'], 'references' => ['interests', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
             'major_key' => ['type' => 'foreign', 'columns' => ['major_id'], 'references' => ['majors', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'user_type_key' => ['type' => 'foreign', 'columns' => ['userType_id'], 'references' => ['user_types', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -64,8 +67,9 @@ class UsersFixture extends TestFixture
             'weakness' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
             'major_id' => 1,
             'interest_id' => 1,
-            'created' => '2017-09-05 11:18:34',
-            'modified' => '2017-09-05 11:18:34'
+            'userType_id' => 1,
+            'created' => '2017-09-06 08:19:35',
+            'modified' => '2017-09-06 08:19:35'
         ],
     ];
 }
