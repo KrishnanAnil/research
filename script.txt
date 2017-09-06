@@ -71,3 +71,8 @@ CREATE TABLE users_projects (
     FOREIGN KEY project_key1(project_id) REFERENCES projects(id),
     FOREIGN KEY user_key1(user_id) REFERENCES users(id)
 );
+
+CREATE TABLE user_types (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    projectName VARCHAR(255) NOT NULL
+);
