@@ -31,6 +31,7 @@ Then visit `http://localhost:8765` to see the welcome page.
 
 ## Configuration and Database
 
+Download and install mysql database. Can be done using XAMPP here : https://www.apachefriends.org/index.html
 Open and run the scripts.sql file from the repo to create the database.
 
 Read and edit `config/app.php` and setup the `'Datasources'` and any other
