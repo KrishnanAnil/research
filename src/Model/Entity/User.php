@@ -1,6 +1,6 @@
 <?php
 namespace App\Model\Entity;
-
+use Cake\Auth\DefaultPasswordHasher; //include this line
 use Cake\ORM\Entity;
 
 /**
@@ -18,6 +18,7 @@ use Cake\ORM\Entity;
  * @property int $major_id
  * @property int $interest_id
  * @property int $userType_id
+ * @property int $position_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *

@@ -3,7 +3,7 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
@@ -16,27 +16,100 @@
         <li><?= $this->Html->link(__('List Skills'), ['controller' => 'Skills', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Skill'), ['controller' => 'Skills', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav> -->
 <div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <fieldset>
-        <legend><?= __('Add User') ?></legend>
-        <?php
+        <legend><?= __('Register Page') ?></legend>
+        <div class="row">
+        <div class="col-md-6 radio">
+       <?php echo $this->Form->radio('userType_id',
+       [
+        ['value' => '1', 'text' => 'Researcher', 'style' => 'margin-right:5px;font-size:14px',  'onclick'=> 'myFunc(this.value)'],
+        ['value' => '2', 'text' => 'Academic Expert', 'style' => 'padding-left:5;font-size:14px',  'onclick'=> 'myFunc(this.value)']
+    ]);
+ ?>
+</div>
+</div>
+        <div class="row">
+            <div class="col-md-6">
+            <?php
             echo $this->Form->control('username');
-            echo $this->Form->control('fullName');
-            echo $this->Form->control('organisation');
-            echo $this->Form->control('email');
-            echo $this->Form->control('password');
-            echo $this->Form->control('experiences');
-            echo $this->Form->control('strengths');
-            echo $this->Form->control('weakness');
-            echo $this->Form->control('major_id', ['options' => $majors]);
-            echo $this->Form->control('interest_id', ['options' => $interests]);
-            echo $this->Form->control('userType_id');
-            echo $this->Form->control('projects._ids', ['options' => $projects]);
-            echo $this->Form->control('skills._ids', ['options' => $skills]);
+        echo $this->Form->control('fullName'); 
         ?>
+    </div>
+    <div class="col-md-6">
+    <?php echo $this->Form->control('experiences'); ?>
+</div>
+    </div>
+    <div class="row">
+            <div class="col-md-6">
+            <?php
+echo $this->Form->control('email');
+echo $this->Form->control('password');
+            ?>
+            </div>
+    <div class="col-md-6">
+    <?php             echo $this->Form->control('strengths');
+ ?>
+</div>
+    </div>
+    <div class="row">
+            <div class="col-md-6">
+            <?php
+            echo $this->Form->control('confirm_password',array('type'  =>  'password'));
+            echo $this->Form->control('organisation');
+            echo $this->Form->control('major_id', ['options' => $majors]); 
+            
+?>
+            </div>
+    <div class="col-md-6">
+    <?php                         
+    echo $this->Form->control('position_id', ['options' => $positions]);  
+    echo $this->Form->control('skills._ids', ['options' => $skills]);
+    
+ ?>
+</div>
+</div>
+
+
+<div class="row">
+            <div class="col-md-6">
+            <?php
+                       
+            echo $this->Form->control('interest_id', ['options' => $interests]);
+            
+?>
+            </div>
+    <div class="col-md-6">
+
+</div>
+</div>
+
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="row ">
+    <?= $this->Form->button(__('Submit'), array('class'  =>  'btn-block btn-primary')) ?>
+       </div>
     <?= $this->Form->end() ?>
 </div>
+<script type="text/javascript">
+    $( window ).on( "load", function() { 
+        $("label[for='usertype-id-1']").click();
+        //$("#userType-id-1")
+        // myFunc(1);
+    });
+    function myFunc(val) {
+            if(val==2){
+                $('#position-id').addClass('hide');
+                $("label[for='position-id']").addClass('hide');
+                $('#skills-ids').removeClass('hide');
+                $("label[for='skills-ids']").removeClass('hide');
+            }
+            else{
+                $('#position-id').removeClass('hide');
+                $("label[for='position-id']").removeClass('hide');
+                $('#skills-ids').addClass('hide');
+                $("label[for='skills-ids']").addClass('hide');
+            }
+       }
+</script>

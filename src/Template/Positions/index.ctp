@@ -1,32 +1,28 @@
 <?php
 /**
   * @var \App\View\AppView $this
-  * @var \App\Model\Entity\Skill[]|\Cake\Collection\CollectionInterface $skills
+  * @var \App\Model\Entity\Position[]|\Cake\Collection\CollectionInterface $positions
   */
 ?>
-<div class="skills index large-9 medium-8 columns content">
-    <h3><?= __('Skills') ?></h3>
+<div class="positions index large-9 medium-8 columns content">
+    <h3><?= __('Positions') ?></h3>
     <table class="table table-responsive table-striped table-bordered">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('title') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('position') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($skills as $skill): ?>
+            <?php foreach ($positions as $position): ?>
             <tr>
-                <td><?= $this->Number->format($skill->id) ?></td>
-                <td><?= h($skill->title) ?></td>
-                <td><?= h($skill->created) ?></td>
-                <td><?= h($skill->modified) ?></td>
+                <td><?= $this->Number->format($position->id) ?></td>
+                <td><?= h($position->position) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $skill->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $skill->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $skill->id], ['confirm' => __('Are you sure you want to delete # {0}?', $skill->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $position->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $position->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $position->id], ['confirm' => __('Are you sure you want to delete # {0}?', $position->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

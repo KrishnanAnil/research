@@ -271,7 +271,8 @@ ALTER TABLE `projects_skills`
 ALTER TABLE `users`
   ADD CONSTRAINT `interest_key` FOREIGN KEY (`interest_id`) REFERENCES `interests` (`id`),
   ADD CONSTRAINT `major_key` FOREIGN KEY (`major_id`) REFERENCES `majors` (`id`),
-  ADD CONSTRAINT `user_type_key` FOREIGN KEY (`userType_id`) REFERENCES `user_types` (`id`);
+  ADD CONSTRAINT `user_type_key` FOREIGN KEY (`userType_id`) REFERENCES `user_types` (`id`),
+  ADD CONSTRAINT `position_key` FOREIGN KEY (`position_id`) REFERENCES `positions` (`id`);
 
 --
 -- Constraints for table `users_projects`
