@@ -4,26 +4,29 @@
   * @var \App\Model\Entity\Project[]|\Cake\Collection\CollectionInterface $projects
   */
 ?>
-<div class="projects well well-lg">
-    <h3><?= __('List of Projects') ?></h3>
-    <table class="table table-responsive table-striped">
+<div class="projects">
+    <h3><?= __('Projects') ?></h3>
+    <table class="table table-responsive table-striped table-bordered">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('Stauts') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('projectName') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('description') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($projects as $project): ?>
             <tr>
-                <td><?php echo $this->Form->checkbox('status', ['disabled'=>true, 'hiddenField' => false, 'checked'=> $project->status]); ?>
-                </td>
+                <td><?= $this->Number->format($project->id) ?></td>
                 <td><?= h($project->projectName) ?></td>
-                <td><?= h($project->description) ?></td>
+                <td><?= h($project->created) ?></td>
+                <td><?= h($project->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Form->postLink(__('Apply'), ['action' => 'apply', $project->id]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $project->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $project->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $project->id], ['confirm' => __('Are you sure you want to delete # {0}?', $project->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

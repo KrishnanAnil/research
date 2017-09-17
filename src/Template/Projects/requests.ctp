@@ -5,26 +5,33 @@
   */
 ?>
 <div class="projects well well-lg">
-    <h3><?= __('List of Projects') ?></h3>
+    <h3><?= __('Requests') ?></h3>
     <table class="table table-responsive table-striped">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('Stauts') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Researcher Name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('projectName') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('description') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('skills') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($projects as $project): ?>
             <tr>
-                <td><?php echo $this->Form->checkbox('status', ['disabled'=>true, 'hiddenField' => false, 'checked'=> $project->status]); ?>
+                <td><?= h($project->fullName) ?>
                 </td>
                 <td><?= h($project->projectName) ?></td>
                 <td><?= h($project->description) ?></td>
-                <td class="actions">
-                    <?= $this->Form->postLink(__('Apply'), ['action' => 'apply', $project->id]) ?>
-                </td>
+                <td><?= h($project->skills) ?></td>
+                <td><?= h($project->status) ?></td>
+                <?php if($project->projectName) {
+                 echo '<td class="actions">';
+                 echo  $this->Html->link(__('View'), ['action' => 'request', $project->userId, $project->id ]);
+                 echo  $this->Form->postLink(__('Delete'), ['action' => 'deleteRequest', $project->userId, $project->id], ['confirm' => __('Are you sure you want to delete this request?')]);
+                 echo '</td>';
+                } ?>
             </tr>
             <?php endforeach; ?>
         </tbody>

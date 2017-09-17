@@ -31,7 +31,7 @@ class PositionsTable extends Table
         parent::initialize($config);
 
         $this->setTable('positions');
-        $this->setDisplayField('id');
+        $this->setDisplayField('position');
         $this->setPrimaryKey('id');
         $this->hasMany('Users', [
             'foreignKey' => 'position_id'

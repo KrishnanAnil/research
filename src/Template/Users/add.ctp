@@ -99,7 +99,7 @@ echo $this->Form->control('password');
         // myFunc(1);
     });
     function myFunc(val) {
-            if(val==2){
+            if(val==1){
                 $('#position-id').addClass('hide');
                 $("label[for='position-id']").addClass('hide');
                 $('#skills-ids').removeClass('hide');
