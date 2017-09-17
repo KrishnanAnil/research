@@ -20,9 +20,10 @@ class UsersControllerTest extends IntegrationTestCase
         'app.majors',
         'app.interests',
         'app.projects',
-        'app.users_projects',
         'app.skills',
-        'app.users_skills'
+        'app.projects_skills',
+        'app.users_skills',
+        'app.users_projects'
     ];
 
     /**

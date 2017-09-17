@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\MajorsTable|\Cake\ORM\Association\BelongsTo $Majors
  * @property \App\Model\Table\InterestsTable|\Cake\ORM\Association\BelongsTo $Interests
+ * @property |\Cake\ORM\Association\BelongsTo $UserTypes
  * @property \App\Model\Table\ProjectsTable|\Cake\ORM\Association\BelongsToMany $Projects
  * @property \App\Model\Table\SkillsTable|\Cake\ORM\Association\BelongsToMany $Skills
  *
@@ -47,8 +48,16 @@ class UsersTable extends Table
             'foreignKey' => 'major_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Positions', [
+            'foreignKey' => 'position_id',
+            'joinType' => 'INNER'
+        ]);
         $this->belongsTo('Interests', [
             'foreignKey' => 'interest_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('UserTypes', [
+            'foreignKey' => 'userType_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsToMany('Projects', [
@@ -112,6 +121,23 @@ class UsersTable extends Table
             ->scalar('weakness')
             ->allowEmpty('weakness');
 
+        $validator
+            ->requirePresence('confirm_password', 'create', 'Password must be required!')
+            ->notEmpty('confirm_password', 'Confirm password must be required!')
+            ->add(
+                'confirm_password',
+                'custom',
+                [
+                    'rule' => function ($value, $context) {
+                            if (isset($context['data']['password']) && $value == $context['data']['password']) {
+                                return true;
+                            }
+                            return false;
+                        },
+                    'message' => 'Sorry, password and confirm password does not matched'
+                ]
+            );
+
         return $validator;
     }
 
@@ -128,7 +154,9 @@ class UsersTable extends Table
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['major_id'], 'Majors'));
         $rules->add($rules->existsIn(['interest_id'], 'Interests'));
-
+        $rules->add($rules->existsIn(['userType_id'], 'UserTypes'));
+        $rules->add($rules->existsIn(['position_id'], 'Positions'));
+        
         return $rules;
     }
 }

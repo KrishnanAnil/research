@@ -13,7 +13,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'RPGS';
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,33 +25,61 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
-
+    <?= $this->Html->css('bootstrap/bootstrap.css');
+     echo $this->Html->script(['jquery/jquery.js', 'bootstrap/bootstrap.js','jquery.matchHeight.js']);
+     ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
-        </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
-            </ul>
-        </div>
+<div id="wrap">
+<nav class="navbar navbar-default" style="margin-bottom: 10px; min-height:100px;background-color:#3c75a7;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#" style="color:#fff">
+        <img alt="Research" src="/img/RPGS_logo/Small_size_245x67_pixels/3_White_logo_on_color1_245x67.png" style="height:75px; padding-top:0px">
+      </a>
+    </div>
+  </div>
+</nav>
+<?php
+  $user = $this->request->session()->read('Auth.User');
+  ?>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+    <ul class="nav nav-pills">
+  <?php if($user['userType_id'] == 2){
+   echo '<li role="presentation">'. $this->Html->link(__('Home'), ['controller' => 'Projects', 'action' => 'requests']).'</li>';       
+   echo '<li role="presentation">'. $this->Html->link(__('Post Project'), ['controller' => 'Projects', 'action' => 'add']).'</li>';
+  } ?>
+  <?php if($user['userType_id'] == 1){
+   echo '<li role="presentation">'. $this->Html->link(__('Projects'), ['controller' => 'Projects', 'action' => 'index']).'</li>';
+  } ?>
+  <?php 
+    echo '<li role="presentation">'. $this->Html->link(__('My Account'), ['controller' => 'Users', 'action' => 'edit', $user['id']]).'</li>';
+    ?>
+  <li role="presentation"><a href="#">About</a></li>
+  
+</ul>
+    </div>
+    </div>
     </nav>
+
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>
     </div>
-    <footer>
-    </footer>
+
+</div>
+    <div id="footer">
+    <div class="container text-right">
+        <p class="muted credit">Research Project and Guidance Services by Basem. Copyright (c) 2017.</p>
+    </div>
+
+</div>
 </body>
+
 </html>

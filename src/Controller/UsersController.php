@@ -44,7 +44,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Majors', 'Interests', 'Projects', 'Skills']
+            'contain' => ['Majors', 'Interests', 'Projects', 'Skills', 'Positions']
         ]);
 
         $this->set('user', $user);
@@ -72,7 +72,8 @@ class UsersController extends AppController
         $interests = $this->Users->Interests->find('list', ['limit' => 200]);
         $projects = $this->Users->Projects->find('list', ['limit' => 200]);
         $skills = $this->Users->Skills->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'majors', 'interests', 'projects', 'skills'));
+        $positions = $this->Users->Positions->find('list', ['limit' => 200]);
+        $this->set(compact('user', 'majors', 'interests', 'projects', 'skills','positions'));
         $this->set('_serialize', ['user']);
     }
 
@@ -101,7 +102,9 @@ class UsersController extends AppController
         $interests = $this->Users->Interests->find('list', ['limit' => 200]);
         $projects = $this->Users->Projects->find('list', ['limit' => 200]);
         $skills = $this->Users->Skills->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'majors', 'interests', 'projects', 'skills'));
+        $positions = $this->Users->Positions->find('list', ['limit' => 200]);
+        
+        $this->set(compact('user', 'majors', 'interests', 'projects', 'skills','positions'));
         $this->set('_serialize', ['user']);
     }
 

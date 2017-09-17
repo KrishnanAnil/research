@@ -49,7 +49,8 @@ class ProjectsTable extends Table
         $this->belongsToMany('Users', [
             'foreignKey' => 'project_id',
             'targetForeignKey' => 'user_id',
-            'joinTable' => 'users_projects'
+            'joinTable' => 'users_projects',
+            'saveStrategy'=>'append'
         ]);
     }
 

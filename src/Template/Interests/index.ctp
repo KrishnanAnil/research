@@ -4,17 +4,10 @@
   * @var \App\Model\Entity\Interest[]|\Cake\Collection\CollectionInterface $interests
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Interest'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+
 <div class="interests index large-9 medium-8 columns content">
     <h3><?= __('Interests') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <table class="table table-responsive table-striped table-bordered">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
