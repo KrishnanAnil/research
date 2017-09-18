@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2017 at 01:03 PM
+-- Generation Time: Sep 18, 2017 at 02:19 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `research`
 --
-CREATE DATABASE IF NOT EXISTS `research` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `research`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +28,6 @@ USE `research`;
 -- Table structure for table `interests`
 --
 
-DROP TABLE IF EXISTS `interests`;
 CREATE TABLE `interests` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -51,7 +48,6 @@ INSERT INTO `interests` (`id`, `title`, `created`, `modified`) VALUES
 -- Table structure for table `majors`
 --
 
-DROP TABLE IF EXISTS `majors`;
 CREATE TABLE `majors` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -72,7 +68,6 @@ INSERT INTO `majors` (`id`, `title`, `created`, `modified`) VALUES
 -- Table structure for table `positions`
 --
 
-DROP TABLE IF EXISTS `positions`;
 CREATE TABLE `positions` (
   `id` int(11) NOT NULL,
   `position` varchar(255) NOT NULL
@@ -92,21 +87,23 @@ INSERT INTO `positions` (`id`, `position`) VALUES
 -- Table structure for table `projects`
 --
 
-DROP TABLE IF EXISTS `projects`;
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL,
   `projectName` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL
+  `modified` datetime DEFAULT NULL,
+  `supervisor` varchar(250) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `major_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`id`, `projectName`, `description`, `created`, `modified`) VALUES
-(1, 'Test Project 1', 'Description for test Project', '2017-09-15 10:21:53', '2017-09-17 02:03:07');
+INSERT INTO `projects` (`id`, `projectName`, `description`, `created`, `modified`, `supervisor`, `email`, `major_id`) VALUES
+(2, 'Test', 'Desc', '2017-09-18 11:56:45', '2017-09-18 11:56:45', 'Test', 'Test@Test.com', 1);
 
 -- --------------------------------------------------------
 
@@ -114,7 +111,6 @@ INSERT INTO `projects` (`id`, `projectName`, `description`, `created`, `modified
 -- Table structure for table `projects_skills`
 --
 
-DROP TABLE IF EXISTS `projects_skills`;
 CREATE TABLE `projects_skills` (
   `project_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL
@@ -125,8 +121,7 @@ CREATE TABLE `projects_skills` (
 --
 
 INSERT INTO `projects_skills` (`project_id`, `skill_id`) VALUES
-(1, 1),
-(1, 3);
+(2, 3);
 
 -- --------------------------------------------------------
 
@@ -134,7 +129,6 @@ INSERT INTO `projects_skills` (`project_id`, `skill_id`) VALUES
 -- Table structure for table `skills`
 --
 
-DROP TABLE IF EXISTS `skills`;
 CREATE TABLE `skills` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -158,7 +152,6 @@ INSERT INTO `skills` (`id`, `title`, `created`, `modified`) VALUES
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -190,7 +183,6 @@ INSERT INTO `users` (`id`, `username`, `fullName`, `organisation`, `email`, `pas
 -- Table structure for table `users_projects`
 --
 
-DROP TABLE IF EXISTS `users_projects`;
 CREATE TABLE `users_projects` (
   `user_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
@@ -205,7 +197,6 @@ CREATE TABLE `users_projects` (
 -- Table structure for table `users_skills`
 --
 
-DROP TABLE IF EXISTS `users_skills`;
 CREATE TABLE `users_skills` (
   `user_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL
@@ -224,7 +215,6 @@ INSERT INTO `users_skills` (`user_id`, `skill_id`) VALUES
 -- Table structure for table `user_types`
 --
 
-DROP TABLE IF EXISTS `user_types`;
 CREATE TABLE `user_types` (
   `id` int(11) NOT NULL,
   `projectName` varchar(255) NOT NULL
@@ -264,7 +254,8 @@ ALTER TABLE `positions`
 -- Indexes for table `projects`
 --
 ALTER TABLE `projects`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `major_key1` (`major_id`);
 
 --
 -- Indexes for table `projects_skills`
@@ -332,7 +323,7 @@ ALTER TABLE `positions`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `skills`
 --
@@ -351,6 +342,12 @@ ALTER TABLE `user_types`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `projects`
+--
+ALTER TABLE `projects`
+  ADD CONSTRAINT `major_key1` FOREIGN KEY (`major_id`) REFERENCES `majors` (`id`);
 
 --
 -- Constraints for table `projects_skills`

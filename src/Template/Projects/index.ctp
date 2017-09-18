@@ -12,6 +12,8 @@
                 <th scope="col"><?= $this->Paginator->sort('Stauts') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('projectName') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('description') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('supervisor') ?></th>
+
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -22,10 +24,19 @@
                 </td>
                 <td><?= h($project->projectName) ?></td>
                 <td><?= h($project->description) ?></td>
+                <td><?= h($project->supervisor) ?></td>
+
                 <td class="actions">
-                    <?= $this->Form->postLink(__('Apply'), ['action' => 'apply', $project->id]) ?>
+                    <?php if($project->status == 1){
+                            echo $this->Form->postLink(__('Processing'), ['action' => 'apply', $project->id]);
+                        } else if($project->status == null) {
+                            echo $this->Form->postLink(__('Apply'), ['action' => 'apply', $project->id]);                            
+                        }
+                    ?>
                 </td>
+
             </tr>
+
             <?php endforeach; ?>
         </tbody>
     </table>

@@ -56,13 +56,16 @@ $cakeDescription = 'RPGS';
    echo '<li role="presentation">'. $this->Html->link(__('Post Project'), ['controller' => 'Projects', 'action' => 'add']).'</li>';
   } ?>
   <?php if($user['userType_id'] == 1){
+   echo '<li role="presentation">'. $this->Html->link(__('Home'), ['controller' => 'Projects', 'action' => 'view']).'</li>';              
    echo '<li role="presentation">'. $this->Html->link(__('Projects'), ['controller' => 'Projects', 'action' => 'index']).'</li>';
   } ?>
   <?php 
     echo '<li role="presentation">'. $this->Html->link(__('My Account'), ['controller' => 'Users', 'action' => 'edit', $user['id']]).'</li>';
     ?>
   <li role="presentation"><a href="#">About</a></li>
-  
+  <?php 
+    echo '<li role="presentation">'. $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']).'</li>';
+    ?>
 </ul>
     </div>
     </div>
