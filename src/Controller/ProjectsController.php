@@ -50,14 +50,17 @@ class ProjectsController extends AppController
     {
         $userId = $this->Auth->user('id');
         
-        $projects = $this->paginate(
+        $projects =  $this->paginate(
         $this->Projects
         ->find('all')
         ->select([
                 'userId'=> 'ProjectUsers.user_id', 
-                'fullName'=> 'Users.fullName'
+                'fullName'=> 'Users.fullName',
+                'projectName' => 'Projects.projectName',
+                'description' => 'Projects.description',
+                'supervisor' => 'Projects.supervisor',
+                'email'=> 'Projects.email'
                 ])
-        ->select($this->Projects)
         ->join([
             'userProjects'=>[
             'table' => 'users_projects',
@@ -216,6 +219,7 @@ class ProjectsController extends AppController
             'skills' => [
                 'table' => 'skills',
                 'alias' => 'Skills',
+                'type' => 'LEFT',                
                 'conditions' => [ array('UsersSkills.skill_id = Skills.id') ]   
             ],
         ]));
