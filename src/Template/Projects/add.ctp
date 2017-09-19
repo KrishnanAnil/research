@@ -11,6 +11,8 @@
         <?php
             echo $this->Form->control('projectName',["placeholder"=>"Title of Project"]);
             echo $this->Form->control('description');
+            echo $this->Form->control('major_id', ['options' => $majors]); 
+           
             echo $this->Form->control('skills._ids', ['options' => $skills]);
         ?>
     </fieldset>

@@ -52,6 +52,10 @@ class ProjectsTable extends Table
             'joinTable' => 'users_projects',
             'saveStrategy'=>'append'
         ]);
+        $this->belongsTo('Majors', [
+            'foreignKey' => 'major_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -75,7 +79,14 @@ class ProjectsTable extends Table
             ->scalar('description')
             ->requirePresence('description', 'create')
             ->notEmpty('description');
-
+        $validator
+            ->scalar('supervisor')
+            ->requirePresence('supervisor', 'create')
+            ->notEmpty('supervisor');
+        $validator
+            ->scalar('email')
+            ->requirePresence('email', 'create')
+            ->notEmpty('email');
         return $validator;
     }
 }

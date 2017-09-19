@@ -46,14 +46,35 @@ class ProjectsController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view()
     {
-        $project = $this->Projects->get($id, [
-            'contain' => ['Skills', 'Users']
-        ]);
-
-        $this->set('project', $project);
-        $this->set('_serialize', ['project']);
+        $userId = $this->Auth->user('id');
+        
+        $projects =  $this->paginate(
+        $this->Projects
+        ->find('all')
+        ->select([
+                'userId'=> 'ProjectUsers.user_id', 
+                'fullName'=> 'Users.fullName',
+                'projectName' => 'Projects.projectName',
+                'description' => 'Projects.description',
+                'supervisor' => 'Projects.supervisor',
+                'email'=> 'Projects.email'
+                ])
+        ->join([
+            'userProjects'=>[
+            'table' => 'users_projects',
+            'alias' => 'ProjectUsers',
+            'conditions' => [ array('ProjectUsers.project_id = Projects.id', 'status'=> 2) ]   
+            ],
+            'users' => [
+                'table' => 'users',
+                'alias' => 'Users',
+                'conditions' => [ array('ProjectUsers.user_id = Users.id') ]   
+                ]
+        ]));
+        $this->set(compact('projects'));
+        $this->set('_serialize', ['projects']);
     }
 
     /**
@@ -65,7 +86,13 @@ class ProjectsController extends AppController
     {
         $project = $this->Projects->newEntity();
         if ($this->request->is('post')) {
+            $userId = $this->Auth->user('id');
+            $table = $this->loadModel('Users');
+            $user = $table->get($userId);
+
             $project = $this->Projects->patchEntity($project, $this->request->getData());
+            $project->supervisor = $user->fullName;
+            $project->email = $user->email;
             if ($this->Projects->save($project)) {
                 $this->Flash->success(__('The project has been saved.'));
 
@@ -75,7 +102,9 @@ class ProjectsController extends AppController
         }
         $skills = $this->Projects->Skills->find('list', ['limit' => 200]);
         $users = $this->Projects->Users->find('list', ['limit' => 200]);
-        $this->set(compact('project', 'skills', 'users'));
+        $majors = $this->Projects->Majors->find('list', ['limit' => 200]);
+        
+        $this->set(compact('project', 'skills', 'users','majors'));
         $this->set('_serialize', ['project']);
     }
 
