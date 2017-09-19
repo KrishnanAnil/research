@@ -27,7 +27,7 @@
     </fieldset>
             <?php endforeach; ?>
     <?= $this->Form->end() ?>
-    <?php } ?>
+
     <?php if(!isset($projects)) { 
         echo 'No Project has been approved / assigned.'; 
     } ?>
