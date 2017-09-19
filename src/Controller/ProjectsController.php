@@ -190,6 +190,7 @@ class ProjectsController extends AppController
             'skills' => [
                 'table' => 'skills',
                 'alias' => 'Skills',
+                'type' => 'LEFT',
                 'conditions' => [ array('UsersSkills.skill_id = Skills.id') ]   
             ],
         ]));
