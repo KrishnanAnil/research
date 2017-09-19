@@ -5,7 +5,6 @@
   */
 ?>
 <div class="projects form large-9 medium-8 columns content">
-    <?php if( isset($project)){ ?>
     <fieldset>
         <legend><?= __('Project Details') ?></legend>
         <?php
@@ -25,8 +24,5 @@
             </div>
     </fieldset>
     <?= $this->Form->end() ?>
-    <?php } ?>
-    <?php if(!isset($project)) { 
-        echo 'No Project has been approved / assigned.'; 
-    } ?>
+    
 </div>
