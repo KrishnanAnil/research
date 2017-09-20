@@ -72,7 +72,7 @@ class ProjectsController extends AppController
                 'alias' => 'Users',
                 'conditions' => [ array('ProjectUsers.user_id = Users.id') ]   
                 ]
-        ])->first());
+        ]));
         $this->set(compact('projects'));
         $this->set('_serialize', ['projects']);
     }
