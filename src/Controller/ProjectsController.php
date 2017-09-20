@@ -72,7 +72,7 @@ class ProjectsController extends AppController
                 'alias' => 'Users',
                 'conditions' => [ array('ProjectUsers.user_id = Users.id') ]   
                 ]
-        ]));
+        ])->first());
         $this->set(compact('projects'));
         $this->set('_serialize', ['projects']);
     }
@@ -209,19 +209,19 @@ class ProjectsController extends AppController
                 'alias' => 'Users',
                 'conditions' => [ array('ProjectUsers.user_id = Users.id') ]   
                 ]
-                ,
-            'users_skills' => [
-                'table' => 'users_skills',
-                'alias' => 'UsersSkills',
-                'type' => 'LEFT',
-                'conditions' => [ array('UsersSkills.user_id = Users.id') ]   
-            ],
-            'skills' => [
-                'table' => 'skills',
-                'alias' => 'Skills',
-                'type' => 'LEFT',
-                'conditions' => [ array('UsersSkills.skill_id = Skills.id') ]   
-            ],
+            //     ,
+            // 'users_skills' => [
+            //     'table' => 'users_skills',
+            //     'alias' => 'UsersSkills',
+            //     'type' => 'LEFT',
+            //     'conditions' => [ array('UsersSkills.user_id = Users.id') ]   
+            // ],
+            // 'skills' => [
+            //     'table' => 'skills',
+            //     'alias' => 'Skills',
+            //     'type' => 'LEFT',
+            //     'conditions' => [ array('UsersSkills.skill_id = Skills.id') ]   
+            // ],
         ]));
         $this->set(compact('projects'));
         $this->set('_serialize', ['projects']);

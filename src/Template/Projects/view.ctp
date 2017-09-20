@@ -25,7 +25,7 @@
             </div>
             </div>
     </fieldset>
-            <?php endforeach; ?>
+            <?php break; endforeach; ?>
     <?php $this->Form->end();
     }
     ?>
