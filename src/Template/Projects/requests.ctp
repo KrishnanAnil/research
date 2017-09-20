@@ -12,7 +12,7 @@
                 <th scope="col"><?= $this->Paginator->sort('Researcher Name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('projectName') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('description') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('skills') ?></th>
+                <!-- <th scope="col"><?= $this->Paginator->sort('skills') ?></th> -->
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -24,7 +24,7 @@
                 </td>
                 <td><?= h($project->projectName) ?></td>
                 <td><?= h($project->description) ?></td>
-                <td><?= h($project->skills) ?></td>
+                <!-- <td><?= h($project->skills) ?></td> -->
                 <td><?= h($project->status) ?></td>
                 <?php if($project->projectName) {
                  echo '<td class="actions">';

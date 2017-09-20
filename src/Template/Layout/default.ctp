@@ -63,9 +63,9 @@ $cakeDescription = 'RPGS';
     echo '<li role="presentation">'. $this->Html->link(__('My Account'), ['controller' => 'Users', 'action' => 'edit', $user['id']]).'</li>';
     ?>
   <li role="presentation"><a href="#">About</a></li>
-  <?php 
+  <?php if(isset($user)){
     echo '<li role="presentation">'. $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']).'</li>';
-    ?>
+  }?>
 </ul>
     </div>
     </div>

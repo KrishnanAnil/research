@@ -26,9 +26,12 @@
             </div>
     </fieldset>
             <?php endforeach; ?>
-    <?= $this->Form->end() ?>
+    <?php $this->Form->end();
+    }
+    ?>
 
-    <?php if(!isset($projects)) { 
+    <?php if(count($projects) == 0) { 
         echo 'No Project has been approved / assigned.'; 
     } ?>
+
 </div>

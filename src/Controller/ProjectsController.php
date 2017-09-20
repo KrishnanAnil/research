@@ -194,8 +194,8 @@ class ProjectsController extends AppController
         ->select(['status'=>'CASE  ProjectUsers.status
         when 1 THEN "Pending" WHEN 2  THEN "Approved" WHEN 3 THEN "Disapproved" End', 
                 'userId'=> 'ProjectUsers.user_id', 
-                'fullName'=> 'Users.fullName',
-                'skills' => 'GROUP_CONCAT(DISTINCT Skills.title)'
+                'fullName'=> 'Users.fullName'
+                // 'skills' => 'GROUP_CONCAT(DISTINCT Skills.title)'
                 ])
         ->select($this->Projects)
         ->join([
